@@ -1,0 +1,45 @@
+body {
+    /*min-width: 800px;*/
+    margin: auto;
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 10px;
+    
+}
+
+.usuario-title-container {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.handling-usuario-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    
+    padding: 20px;
+    width: 800px;
+    align-content: center;
+    justify-content: center;
+}
+
+.id-wrapper {
+    margin-top: 10px;
+}
+
+
+/*=========Seccion listado de usuario=========*/
+.user-table-wrapper {
+   /*max-height: 180px;*/
+}
+.user-table-row {
+    background-color: red !important;
+
+}
+
+
+
+/*=========End Seccion listado de usuario=========*/
