@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {    
-    let test = [];
 
     let USERS = [
         {id: 1, name: 'Fernando', lastName: 'Bonilla', CI: '45268136', phoneNumber: '099679788', imgSrc: '\imgs\photo-1494790108377-be9c29b29330.png',},
@@ -18,11 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
         let userPhoneNumber = document.getElementById('user-phone-number').value;
         let userProfilePicture = document.getElementById('user-profile-picture').value;
 
-        let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture}
+        
+
+        if(userName == "" || userLastName == "" || userCi == "" || userPhoneNumber == "" ){
+            alert('Por favor complete todos los datos');
+        }else {
+            let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture}
+            USERS.push(userCreated);  
+            alert('Usuario creado');      
+            cleanFormAddUser();
+            listUsers(USERS);
+
+        }
                 
-        USERS.push(userCreated);        
-        cleanFormAddUser();
-        listUsers(USERS);
+        
     }
 
     function cleanFormAddUser() {
