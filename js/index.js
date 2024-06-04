@@ -15,9 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let userLastName = document.getElementById('user-last-name').value;
         let userCi = document.getElementById('user-ci').value;
         let userPhoneNumber = document.getElementById('user-phone-number').value;
-        let userProfilePicture = document.getElementById('user-profile-picture').value;
-
-        
+        let userProfilePicture = document.getElementById('user-profile-picture').value;        
 
         if(userName == "" || userLastName == "" || userCi == "" || userPhoneNumber == "" ){
             alert('Por favor complete todos los datos');
@@ -28,9 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cleanFormAddUser();
             listUsers(USERS);
 
-        }
-                
-        
+        }          
     }
 
     function cleanFormAddUser() {
@@ -75,11 +71,31 @@ document.addEventListener("DOMContentLoaded", () => {
             tr.appendChild(tdPhoneNumber);
 
             tableBody.appendChild(tr);
+        }  
+    }    
+    
+    let searchBarUser = document.getElementById('bar-search-user')
+    searchBarUser.addEventListener('keyup', searchUser);
 
-        }       
+    function searchUser(){
+        console.log("entra")                
+        let searchBarUserValue = document.getElementById('bar-search-user').value.toLowerCase();        
+        
+        //usar metodo filter
+        if(searchBarUserValue != "") {
+            let usersWithCoincidence = USERS.filter((user) => {                        
+                return user.name.toLowerCase().includes(searchBarUserValue) || 
+                    user.lastName.toLowerCase().includes(searchBarUserValue) || 
+                    user.phoneNumber.includes(searchBarUserValue); // == searchBarUserValue;//==  || user.lastName.toLowerCase() == searchBarUserValue || user.phoneNumber == searchBarUserValue;           
+                 
+            });
+            listUsers(usersWithCoincidence);
+            
+        }else {
+            listUsers(USERS);
+        }           
+        
+    }   
 
 
-    }
-
-
-  });
+});
