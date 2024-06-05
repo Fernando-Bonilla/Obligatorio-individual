@@ -10,25 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let createUserButton = document.getElementById('create-user-button');
     createUserButton.addEventListener('click', addUser);
 
-    //Aca estoy haciendo que cada vez que se de click en los titulos se muestren u oculten los elementos debajo
-    let userAltaFormTitle = document.getElementById('title-crud-user-form');
-    let userTableAndSearchBarTitle = document.getElementById('title-users-list');
-
-    userAltaFormTitle.addEventListener('click', () => showHideElement('.alta-usuario-form-container'));
-    userTableAndSearchBarTitle.addEventListener('click', () => showHideElement('.user-table-and-search-bar-container'));  
-
-    function showHideElement(elementClass){                     
-        let elementToShowOrHide = document.querySelector(elementClass);
-        
-        if(elementToShowOrHide.style.display == 'none' || elementToShowOrHide.style.display === '') {           
-            elementToShowOrHide.style.display = 'block';
-        }else{            
-            elementToShowOrHide.style.display = 'none';
-        }        
-    }
-    //Fin haciendo que cada vez que se de click en los titulos se muestren u oculten los elementos debajo
-
-
     function addUser(){      
         let userName = document.getElementById('user-name').value;        
         let userLastName = document.getElementById('user-last-name').value;
@@ -52,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cleanFormAddUser();
             listUsers(USERS);                       
         }                
-    }   
+    }
 
     function cleanFormAddUser() {
         document.getElementById('user-name').value = "";        
@@ -62,6 +43,64 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('user-profile-picture').value = "";
 
     }
+
+
+
+    //Funciones para remover
+    let removeUserButton = document.getElementById('remove-user-button');
+    removeUserButton.addEventListener('click', () => removeUser(getInputRadioCheckedId()));    
+
+    function getUserById(id){
+        //Hago esta funcion así solo manoseo una sola vez la variable global USERS, cada vez que tengo un id y quiero saber que usuario es, usar esta funcion
+        let userById;
+
+        USERS.forEach((user) =>{
+            
+            if(id == user.id) {                
+                userById = user;                
+            }            
+        });
+        
+        return userById //el usuario que tiene ese id, USERS.id == id       
+       
+    }
+
+    function getInputRadioCheckedId() {        
+        let arrayInputsCheckRadioButtons = document.querySelectorAll('.form-check-input');        
+        let radioButtonCheckedId;
+
+        arrayInputsCheckRadioButtons.forEach((radioButton) => {
+
+            if(radioButton.checked) {                
+                radioButtonCheckedId = radioButton.id;                
+            }            
+            
+        })       
+        
+        return radioButtonCheckedId
+        
+    }
+
+    function removeUser(id){        
+        let indexOfUser;
+        USERS.forEach((user) => {                   
+            if(user.id == id){
+                indexOfUser = USERS.indexOf(user)
+                
+                if(confirm('Desea eliminar el usurio?')) {
+                    USERS.splice(indexOfUser, 1)
+                }
+                 
+            }
+        })       
+
+        listUsers(USERS);
+    }
+
+    //End Funciones para remover
+
+
+    
 
     function listUsers(usersList){        
         let tableBody = document.getElementById('table-users-listed');
@@ -129,5 +168,22 @@ document.addEventListener("DOMContentLoaded", () => {
         
     }   
     
+    //Aca estoy haciendo que cada vez que se de click en los titulos se muestren u oculten los elementos debajo
+    let userAltaFormTitle = document.getElementById('title-crud-user-form');
+    let userTableAndSearchBarTitle = document.getElementById('title-users-list');
+
+    userAltaFormTitle.addEventListener('click', () => showHideElement('.alta-usuario-form-container'));
+    userTableAndSearchBarTitle.addEventListener('click', () => showHideElement('.user-table-and-search-bar-container'));  
+
+    function showHideElement(elementClass){                     
+        let elementToShowOrHide = document.querySelector(elementClass);
+        
+        if(elementToShowOrHide.style.display == 'none' || elementToShowOrHide.style.display === '') {           
+            elementToShowOrHide.style.display = 'block';
+        }else{            
+            elementToShowOrHide.style.display = 'none';
+        }        
+    }
+    //Fin haciendo que cada vez que se de click en los titulos se muestren u oculten los elementos debajo
 
 });
