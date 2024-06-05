@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {    
 
     let USERS = [
-        {id: 1, name: 'Fernando', lastName: 'Bonilla', CI: '45268136', phoneNumber: '099679788', imgSrc: '\imgs\photo-1494790108377-be9c29b29330.png',},
-        {id: 2, name: 'Andrea', lastName: 'Gomez', CI: '45268138', phoneNumber: '099679755', imgSrc: '\imgs\photo-1494790108377-be9c29b29330.png',},
+        {id: 1, name: 'Fernando', lastName: 'Bonilla', CI: '45268136', phoneNumber: '099679788', imgSrc: 'imgs/fernando.jpg',},
+        {id: 2, name: 'Andrea', lastName: 'Gomez', CI: '45268138', phoneNumber: '099679755', imgSrc: 'imgs/andrea.jpg',},
     ];
 
     listUsers(USERS);
@@ -14,20 +14,26 @@ document.addEventListener("DOMContentLoaded", () => {
         let userName = document.getElementById('user-name').value;        
         let userLastName = document.getElementById('user-last-name').value;
         let userCi = document.getElementById('user-ci').value;
-        let userPhoneNumber = document.getElementById('user-phone-number').value;
-        let userProfilePicture = document.getElementById('user-profile-picture').value;        
+        let userPhoneNumber = document.getElementById('user-phone-number').value;        
+        
+        let userProfilePicture;   
+        if(document.getElementById('user-profile-picture').value == "") {
+            userProfilePicture = "imgs/userWithNoPicture.jpg";
+        }else {
+            //le agrego el .files[0].name porque me da error C:\fakepath\, vi esta solucion en inet (esto me da el nombre del archivo, y aca armo la url)
+            userProfilePicture = "imgs/" + document.getElementById('user-profile-picture').files[0].name; 
+        }          
 
-        if(userName == "" || userLastName == "" || userCi == "" || userPhoneNumber == "" ){
+        if(userName == "" || userLastName == "" || userCi == "" || userPhoneNumber == ""){
             alert('Por favor complete todos los datos');
         }else {
-            let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture}
+            let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
             USERS.push(userCreated);  
             alert('Usuario creado');      
             cleanFormAddUser();
-            listUsers(USERS);
-
-        }          
-    }
+            listUsers(USERS);                       
+        }                
+    }   
 
     function cleanFormAddUser() {
         document.getElementById('user-name').value = "";        
@@ -54,6 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
             input.classList.add('form-check-input');
             input.type = 'radio';
             input.name = 'flexRadioDefault';
+
+            let tdImg = document.createElement('td');
+            let imgUser = document.createElement('img');
+            imgUser.classList.add('user-profile-picture');
+            imgUser.src = user.imgSrc;
             
             let tdName = document.createElement('td');
             tdName.innerHTML = user.name;
@@ -65,7 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
             tdPhoneNumber.innerHTML = user.phoneNumber;            
 
             tdInput.appendChild(input);
-            tr.appendChild(tdInput)            
+            tr.appendChild(tdInput)
+            tdImg.appendChild(imgUser);
+            tr.appendChild(tdImg);            
             tr.appendChild(tdName);
             tr.appendChild(tdLastName);
             tr.appendChild(tdPhoneNumber);
@@ -96,6 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }           
         
     }   
-
+    
 
 });

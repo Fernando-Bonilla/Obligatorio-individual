@@ -32,14 +32,17 @@ header {
 
 
 /*=========Seccion listado de usuario=========*/
-.user-table-wrapper {
-   /*max-height: 180px;*/
+
+/*.user-table-wrapper {
+   max-height: 180px;
+}*/
+
+.user-profile-picture {
+    display: block;
+    overflow: hidden;
+    height: 80px;
+    border-radius: 50px;
+    
 }
-.user-table-row {
-    background-color: red !important;
-
-}
-
-
 
 /*=========End Seccion listado de usuario=========*/
