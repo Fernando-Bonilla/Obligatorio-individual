@@ -33,9 +33,13 @@ header {
 
 /*=========Seccion listado de usuario=========*/
 
-/*.user-table-wrapper {
-   max-height: 180px;
-}*/
+.user-table-wrapper {
+    overflow-y: scroll;
+    max-height: 300px;    
+    margin-bottom: 20px;
+    border: 1px solid;
+
+}
 
 .user-profile-picture {
     display: block;
