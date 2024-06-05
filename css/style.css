@@ -30,14 +30,29 @@ header {
     margin-top: 10px;
 }
 
+/*=========Seccion alta de usuario=========*/
+
+.alta-usuario-form-container {
+    display: none; 
+}
+
+/*=========End Seccion alta de usuario=========*/
+
+.user-table-and-search-bar-container {
+    display: none;
+}
+
 
 /*=========Seccion listado de usuario=========*/
 
 .user-table-wrapper {
     overflow-y: scroll;
     max-height: 300px;    
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid;
+    border-radius: 5px;
+    padding: 2px;
+   
 
 }
 

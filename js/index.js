@@ -10,6 +10,25 @@ document.addEventListener("DOMContentLoaded", () => {
     let createUserButton = document.getElementById('create-user-button');
     createUserButton.addEventListener('click', addUser);
 
+    //Aca estoy haciendo que cada vez que se de click en los titulos se muestren u oculten los elementos debajo
+    let userAltaFormTitle = document.getElementById('title-crud-user-form');
+    let userTableAndSearchBarTitle = document.getElementById('title-users-list');
+
+    userAltaFormTitle.addEventListener('click', () => showHideElement('.alta-usuario-form-container'));
+    userTableAndSearchBarTitle.addEventListener('click', () => showHideElement('.user-table-and-search-bar-container'));  
+
+    function showHideElement(elementClass){                     
+        let elementToShowOrHide = document.querySelector(elementClass);
+        
+        if(elementToShowOrHide.style.display == 'none' || elementToShowOrHide.style.display === '') {           
+            elementToShowOrHide.style.display = 'block';
+        }else{            
+            elementToShowOrHide.style.display = 'none';
+        }        
+    }
+    //Fin haciendo que cada vez que se de click en los titulos se muestren u oculten los elementos debajo
+
+
     function addUser(){      
         let userName = document.getElementById('user-name').value;        
         let userLastName = document.getElementById('user-last-name').value;
