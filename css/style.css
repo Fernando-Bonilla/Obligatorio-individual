@@ -38,12 +38,18 @@ header {
 
 /*=========End Seccion alta de usuario=========*/
 
+
+
+
+/*=========Seccion listado de usuario=========*/
+
 .user-table-and-search-bar-container {
     display: none;
 }
 
-
-/*=========Seccion listado de usuario=========*/
+td {
+    align-content: center;
+}
 
 .user-table-wrapper {
     overflow-y: scroll;

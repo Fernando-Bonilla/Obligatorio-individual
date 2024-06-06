@@ -43,9 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('user-profile-picture').value = "";
 
     }
-
-
-
+    
     //Funciones para remover
     let removeUserButton = document.getElementById('remove-user-button');
     removeUserButton.addEventListener('click', () => removeUser(getInputRadioCheckedId()));    
@@ -97,10 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         listUsers(USERS);
     }
 
-    //End Funciones para remover
-
-
-    
+    //End Funciones para remover    
 
     function listUsers(usersList){        
         let tableBody = document.getElementById('table-users-listed');
@@ -110,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let user = usersList[i];
 
             let tr = document.createElement('tr');
-            tr.classList.add('user-table-row');
+            tr.classList.add('user-table-row');            
 
             let tdInput = document.createElement('td');
             let input = document.createElement('input');
