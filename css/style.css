@@ -32,9 +32,9 @@ header {
 
 /*=========Seccion alta de usuario=========*/
 
-.alta-usuario-form-container {
+/*.alta-usuario-form-container {
     display: none; 
-}
+}*/
 
 /*=========End Seccion alta de usuario=========*/
 
@@ -43,9 +43,9 @@ header {
 
 /*=========Seccion listado de usuario=========*/
 
-.user-table-and-search-bar-container {
+/*.user-table-and-search-bar-container {
     display: none;
-}
+}*/
 
 td {
     align-content: center;
@@ -55,12 +55,28 @@ td {
     overflow-y: scroll;
     max-height: 300px;    
     margin-bottom: 10px;
-    border: 1px solid;
+    border: 1px solid #E9ECEF;
     border-radius: 5px;
-    padding: 2px;
-   
+    padding: 2px;   
 
 }
+
+/*===== Diseños de la scroll bar en el contenedor de lista de usuarios =====*/
+.user-table-wrapper::-webkit-scrollbar {
+    background: #E9ECEF;
+    border-radius: 10px;
+}
+.user-table-wrapper::-webkit-scrollbar-track {    
+    border-radius: 50px;
+}
+.user-table-wrapper::-webkit-scrollbar-thumb {
+    background: #C1C1C1; 
+    border-radius: 10px;
+}
+
+/*===== End Diseños de la scroll bar en el contenedor de lista de usuarios =====*/
+
+  
 
 .user-profile-picture {
     display: block;

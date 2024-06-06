@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let USERS = [
         {id: 1, name: 'Fernando', lastName: 'Bonilla', CI: '45268136', phoneNumber: '099679788', imgSrc: 'imgs/fernando.jpg',},
         {id: 2, name: 'Andrea', lastName: 'Gomez', CI: '45268138', phoneNumber: '099679755', imgSrc: 'imgs/andrea.jpg',},
+        {id: 3, name: 'John', lastName: 'Scott', CI: '48328138', phoneNumber: '097671751', imgSrc: 'imgs/john.jpg',},
+        {id: 3, name: 'Elvio', lastName: 'Gimenez', CI: '43281972', phoneNumber: '091123654', imgSrc: 'imgs/elvio.jpg',},
+        {id: 3, name: 'Lorena', lastName: 'Ponce', CI: '51428314', phoneNumber: '093555879', imgSrc: 'imgs/lorena.jpg',},
     ];
 
     listUsers(USERS);
@@ -173,10 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function showHideElement(elementClass){                     
         let elementToShowOrHide = document.querySelector(elementClass);
         
-        if(elementToShowOrHide.style.display == 'none' || elementToShowOrHide.style.display === '') {           
-            elementToShowOrHide.style.display = 'block';
-        }else{            
+        if(elementToShowOrHide.style.display == 'block' || elementToShowOrHide.style.display === '') {           
             elementToShowOrHide.style.display = 'none';
+        }else{            
+            elementToShowOrHide.style.display = 'block';
         }        
     }
     //Fin haciendo que cada vez que se de click en los titulos se muestren u oculten los elementos debajo
