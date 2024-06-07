@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             input.classList.add('form-check-input');
             input.type = 'radio';
             input.name = 'flexRadioDefault';
+            input.addEventListener('click', checkOrUncheckInput);
 
             let tdImg = document.createElement('td');
             let imgUser = document.createElement('img');
@@ -141,13 +142,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             tableBody.appendChild(tr);
         }  
-    }    
+    }
+    
+    function checkOrUncheckInput(){
+        //aca agregar un checkeo, si el input esta checked y recibe un click, deschequearlo
+    }
     
     let searchBarUser = document.getElementById('bar-search-user')
     searchBarUser.addEventListener('keyup', searchUser);
 
     function searchUser(){
-        console.log("entra")                
+        //console.log("entra")                
         let searchBarUserValue = document.getElementById('bar-search-user').value.toLowerCase();        
         
         //usar metodo filter
