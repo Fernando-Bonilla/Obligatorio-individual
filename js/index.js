@@ -1,13 +1,14 @@
-document.addEventListener("DOMContentLoaded", () => { 
-       
+import { usersPreload } from "./preload.js";
 
-    let USERS = [
-        {id: 1, name: 'Fernando', lastName: 'Bonilla', CI: '45268136', phoneNumber: '099679788', imgSrc: 'imgs/fernando.jpg',},
-        {id: 2, name: 'Andrea', lastName: 'Gomez', CI: '45268138', phoneNumber: '099679755', imgSrc: 'imgs/andrea.jpg',},
-        {id: 3, name: 'John', lastName: 'Scott', CI: '48328138', phoneNumber: '097671751', imgSrc: 'imgs/john.jpg',},
-        {id: 4, name: 'Elvio', lastName: 'Gimenez', CI: '43281972', phoneNumber: '091123654', imgSrc: 'imgs/elvio.jpg',},
-        {id: 5, name: 'Lorena', lastName: 'Ponce', CI: '51428314', phoneNumber: '093555879', imgSrc: 'imgs/lorena.jpg',},
-    ];
+document.addEventListener("DOMContentLoaded", () => { 
+
+    let USERS = JSON.parse(localStorage.getItem('usersPersistance')) || [];
+
+    if(USERS.length == 0) {
+        USERS = usersPreload;
+        localStorage.setItem('usersPersistance', JSON.stringify(USERS))
+    } 
+    
 
     listUsers(USERS);
     
@@ -32,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
             alert('Por favor complete todos los datos');
         }else {
             let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
-            USERS.push(userCreated);  
+
+            USERS.push(userCreated);
+            localStorage.setItem('usersPersistance', JSON.stringify(USERS)); 
             alert('Usuario creado');      
             cleanFormAddUser();
             listUsers(USERS);                       
@@ -92,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(confirm('Desea eliminar el usurio?')) {
                     USERS.splice(indexOfUser, 1)
                 }
+                localStorage.setItem('usersPersistance', JSON.stringify(USERS));
                  
             }
         })       
