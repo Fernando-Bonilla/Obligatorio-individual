@@ -91,3 +91,13 @@ thead {
 }
 
 /*=========End Seccion listado de usuario=========*/
+
+/*=========Seccion muestra de info de usuario=========*/
+
+.info-user-container {
+    background-color: #f5f5f5; 
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/*=========End Seccion muestra de info de usuario=========*/

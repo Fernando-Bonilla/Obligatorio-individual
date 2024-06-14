@@ -189,22 +189,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showUserInformation(id) {
 
-        let infoUserContainer = document.createElement('div');
-        infoUserContainer.classList.add('.info-user-container');
         let sectionUserContainer = document.getElementById('user-info-section');
+
+        let infoUserContainer = document.createElement('div');
+
+        let elementos = sectionUserContainer.getElementsByClassName('info-user-container');
+        console.log(elementos)
+
+        if(elementos.length > 0) {
+            sectionUserContainer.removeChild(elementos[0]);
+        }
+        
+        infoUserContainer.classList.add('info-user-container'); 
 
         USERS.forEach((user) => {
             if(user.id == id) {                
                 infoUserContainer.innerHTML = 
-                `<p>Nombre:    ${user.name}</p>
-                <p>Apellido:   ${user.lastName}</p>
-                <p>CI:         ${user.CI}</p>
-                <p>Telefono:   ${user.phoneNumber}</p>
-                <p>Direccion: </p>`;
+                `<p><strong>Nombre:</strong>    ${user.name}</p>
+                <p><strong>Apellido:</strong>   ${user.lastName}</p>
+                <p><strong>CI:</strong>         ${user.CI}</p>
+                <p><strong>Telefono:</strong>   ${user.phoneNumber}</p>
+                <p><strong>Direccion:</strong> </p>`;
 
-                sectionUserContainer.appendChild(infoUserContainer);
+                sectionUserContainer.appendChild(infoUserContainer);                
             }
-        });
+
+            //Accion que scrollea hasta el final de la pagina que es donde se muestra la informacion de usuario
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth",
+            });
+
+        });                
 
     }
     
