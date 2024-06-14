@@ -193,11 +193,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let infoUserContainer = document.createElement('div');
 
-        let elementos = sectionUserContainer.getElementsByClassName('info-user-container');
-        console.log(elementos)
+        //capturo los elementos con la clase info-user-container dentro del elemento sectionUserContainer
+        let elements = sectionUserContainer.getElementsByClassName('info-user-container');        
 
-        if(elementos.length > 0) {
-            sectionUserContainer.removeChild(elementos[0]);
+        if(elements.length > 0) {
+            sectionUserContainer.removeChild(elements[0]);
         }
         
         infoUserContainer.classList.add('info-user-container'); 
