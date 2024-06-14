@@ -182,7 +182,31 @@ document.addEventListener("DOMContentLoaded", () => {
             listUsers(USERS);
         }           
         
-    }   
+    }
+    
+    let buttonUserInfo = document.getElementById('button-show-user-information');
+    buttonUserInfo.addEventListener('click', () => showUserInformation(getInputRadioCheckedId()));
+
+    function showUserInformation(id) {
+
+        let infoUserContainer = document.createElement('div');
+        infoUserContainer.classList.add('.info-user-container');
+        let sectionUserContainer = document.getElementById('user-info-section');
+
+        USERS.forEach((user) => {
+            if(user.id == id) {                
+                infoUserContainer.innerHTML = 
+                `<p>Nombre:    ${user.name}</p>
+                <p>Apellido:   ${user.lastName}</p>
+                <p>CI:         ${user.CI}</p>
+                <p>Telefono:   ${user.phoneNumber}</p>
+                <p>Direccion: </p>`;
+
+                sectionUserContainer.appendChild(infoUserContainer);
+            }
+        });
+
+    }
     
     //Aca estoy haciendo que cada vez que se de click en los titulos se muestren u oculten los elementos debajo
     let userAltaFormTitle = document.getElementById('title-crud-user-form');
