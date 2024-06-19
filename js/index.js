@@ -1,3 +1,4 @@
+import { User } from "./classUser.js";
 import { usersPreload } from "./preload.js";
 
 document.addEventListener("DOMContentLoaded", () => { 
@@ -32,7 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if(userName == "" || userLastName == "" || userCi == "" || userPhoneNumber == ""){
             alert('Por favor complete todos los datos');
         }else {
-            let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
+            let userCreated = new User (USERS.length + 1, userName, userLastName, userCi, userPhoneNumber, userProfilePicture);
+            //let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
 
             USERS.push(userCreated);
             localStorage.setItem('usersPersistance', JSON.stringify(USERS)); 
