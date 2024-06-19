@@ -17,10 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     userForm.addEventListener('submit', function(event) {       
 
         //Matamos el submit del formulario por defecto con el preventDafault
-        event.preventDefault();
-
-        //let createUserButton = document.getElementById('create-user-button');
-        //createUserButton.addEventListener('click', addUser);
+        event.preventDefault();       
 
         let hiddenInput = document.getElementById('input-with-id-user');
 
@@ -29,10 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }else{
             modifyUser(hiddenInput.value);
         }
-    });
-
-    //let createUserButton = document.getElementById('create-user-button');
-    //createUserButton.addEventListener('click', addUser);
+    });    
 
     function addUser(){      
         let userName = document.getElementById('user-name').value;        
