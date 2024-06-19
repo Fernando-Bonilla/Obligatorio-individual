@@ -29,8 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });    
 
     function addUser(){      
-        let userName = document.getElementById('user-name').value;        
+        let userName = document.getElementById('user-name').value
+        userName = userName.charAt(0).toUpperCase() + userName.slice(1); //Pongo el primer caracter en mayuscula       
         let userLastName = document.getElementById('user-last-name').value;
+        userLastName = userLastName.charAt(0).toUpperCase() + userLastName.slice(1);
         let userCi = document.getElementById('user-ci').value;
         let userPhoneNumber = document.getElementById('user-phone-number').value;        
         
