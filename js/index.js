@@ -13,8 +13,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     listUsers(USERS);
     
-    let createUserButton = document.getElementById('create-user-button');
-    createUserButton.addEventListener('click', addUser);
+    let userForm = document.getElementById('userForm');
+    userForm.addEventListener('submit', function(event) {       
+
+        //Matamos el submit del formulario por defecto con el preventDafault
+        event.preventDefault();
+
+        //let createUserButton = document.getElementById('create-user-button');
+        //createUserButton.addEventListener('click', addUser);
+
+        let hiddenInput = document.getElementById('input-with-id-user');
+
+        if(hiddenInput.value === ""){
+            addUser();
+        }else{
+            modifyUser(hiddenInput.value);
+        }
+    });
+
+    //let createUserButton = document.getElementById('create-user-button');
+    //createUserButton.addEventListener('click', addUser);
 
     function addUser(){      
         let userName = document.getElementById('user-name').value;        
@@ -30,7 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
             userProfilePicture = "imgs/" + document.getElementById('user-profile-picture').files[0].name; 
         }          
 
-        if(userName == "" || userLastName == "" || userCi == "" || userPhoneNumber == ""){
+        if(userName != "" && userLastName != "" && userCi != "" && userPhoneNumber != ""){
+            let userCreated = new User (USERS.length + 1, userName, userLastName, userCi, userPhoneNumber, userProfilePicture);
+            //let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
+
+            USERS.push(userCreated);
+            localStorage.setItem('usersPersistance', JSON.stringify(USERS)); 
+            alert('Usuario creado');      
+            cleanFormAddUser();
+            listUsers(USERS);
+        }
+
+        /*if(userName == "" || userLastName == "" || userCi == "" || userPhoneNumber == ""){
             alert('Por favor complete todos los datos');
         }else {
             let userCreated = new User (USERS.length + 1, userName, userLastName, userCi, userPhoneNumber, userProfilePicture);
@@ -41,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert('Usuario creado');      
             cleanFormAddUser();
             listUsers(USERS);                       
-        }                
+        }*/                
     }
 
     function cleanFormAddUser() {
@@ -84,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
         })       
         
-        return radioButtonCheckedId
+        return radioButtonCheckedId;
         
     }
 

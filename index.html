@@ -17,31 +17,36 @@
             <div id="title-crud-user-form" class="usuario-title-container">
                 <h3>Alta usuario</h3>
             </div>
-            <div class="alta-usuario-form-container">
-                <div class="row">
-                    <div class="col">
-                      <input id="user-name" type="text" class="form-control" placeholder="Nombre" aria-label="First name">
+            <form id="userForm">
+                <div class="alta-usuario-form-container">
+                    <div class="row">
+                        <div class="col">
+                        <input id="user-name" type="text" class="form-control" placeholder="Nombre" aria-label="First name" required>
+                        </div>
+                        <div class="col">
+                        <input id="user-last-name" type="text" class="form-control" placeholder="Apellido" aria-label="Last name" required>
+                        </div>
                     </div>
-                    <div class="col">
-                      <input id="user-last-name" type="text" class="form-control" placeholder="Apellido" aria-label="Last name">
+                    <div class="mb-3 id-wrapper">
+                        <label for="formGroupExampleInput" class="form-label">C.I</label>
+                        <input id="user-ci" type="tel" class="form-control" id="formGroupExampleInput" placeholder="45268138" required pattern="[1-9]{8}">
                     </div>
-                  </div>
-                  <div class="mb-3 id-wrapper">
-                    <label for="formGroupExampleInput" class="form-label">C.I</label>
-                    <input id="user-ci" type="number" class="form-control" id="formGroupExampleInput" placeholder="45268138">
-                  </div>
-                  <div class="mb-3 phone-number-wrapper">
-                    <label for="formGroupExampleInput" class="form-label">Telefono</label>
-                    <input id="user-phone-number" type="number" class="form-control" id="formGroupExampleInput" placeholder="099532844">
-                  </div>
-                  <div class="mb-3">
-                    <label for="formFile" class="form-label">Foto usuario</label>
-                    <input id="user-profile-picture" class="form-control" type="file" id="formFile">
-                  </div>
-                  <button type="button" id="create-user-button" class="btn btn-success">Crear Usuario</button>
-
-            </div>
+                    <div class="mb-3 phone-number-wrapper">
+                        <label for="formGroupExampleInput" class="form-label">Telefono</label>
+                        <input id="user-phone-number" type="tel" class="form-control" id="formGroupExampleInput" placeholder="099532844" required pattern="[0-9]{9}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Foto usuario</label>
+                        <input id="user-profile-picture" class="form-control" type="file" id="formFile">
+                    </div>
+                    <div class="mb-3 phone-number-wrapper">                        
+                        <input id="input-with-id-user" disabled type="number" class="form-control" id="formGroupExampleInput">
+                    </div>
+                    <button type="submit" id="create-user-button" class="btn btn-success">Crear Usuario</button>
+                </div>
+            </form>            
         </section>
+
         <section class="handling-usuario-wrapper">
             <div id="title-users-list" class="usuario-title-container">
                 <h3>Listado de usuarios</h3>
