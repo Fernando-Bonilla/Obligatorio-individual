@@ -78,8 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('input-with-id-user').value = "";
     }
 
-    //Funcion que captura los datos del juego a modificar y los carga en los inputs correspondientes
-    document.getElementById('modify-user').addEventListener('click', function() {
+    //Funcion que captura los datos del usuario a modificar y los carga en los inputs correspondientes
+    document.getElementById('modify-user').addEventListener('click', getDataAndLoadFormAddUser);
+
+    function getDataAndLoadFormAddUser() {
         let selectedUser = document.getElementById(getInputRadioCheckedId()); // para seleccionar el input que esta checked, lo capturo por id, usando la funcion que devuelve el id del input checked       
                      
         let editingRow;        
@@ -115,8 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             alert('Por favor selecciona un juego.');
         }
-        
-    });
+
+    } 
 
     function modifyUser(id){
         let usersList = JSON.parse(localStorage.getItem('usersPersistance'));
