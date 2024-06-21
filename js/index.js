@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //Matamos el submit del formulario por defecto con el preventDafault
         event.preventDefault();       
 
-        let hiddenInput = document.getElementById('input-with-id-user');
+        let hiddenInput = document.getElementById('input-with-id-user');              
 
         if(hiddenInput.value === ""){
             addUser();
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let userName = document.getElementById('user-name').value
         userName = userName.charAt(0).toUpperCase() + userName.slice(1); //Pongo el primer caracter en mayuscula       
         let userLastName = document.getElementById('user-last-name').value;
-        userLastName = userLastName.charAt(0).toUpperCase() + userLastName.slice(1);
+        userLastName = userLastName.charAt(0).toUpperCase() + userLastName.slice(1); //Pongo el primer caracter en mayuscula
         let userCi = document.getElementById('user-ci').value;
         let userPhoneNumber = document.getElementById('user-phone-number').value;        
         
@@ -75,14 +75,95 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('user-ci').value = "";
         document.getElementById('user-phone-number').value = "";
         document.getElementById('user-profile-picture').value = "";
-
+        document.getElementById('input-with-id-user').value = "";
     }
+
+    //Funcion que captura los datos del juego a modificar y los carga en los inputs correspondientes
+    document.getElementById('modify-user').addEventListener('click', function() {
+        let selectedUser = document.getElementById(getInputRadioCheckedId()); // para seleccionar el input que esta checked, lo capturo por id, usando la funcion que devuelve el id del input checked       
+                     
+        let editingRow;        
+
+        if (selectedUser) {
+            let user = USERS.filter((user) => user.id == selectedUser.id);  
+            editingRow = selectedUser.parentElement.parentElement; //aca capturamos la row entera, el input guardado en selected user, padre td, padre de td es la row
+            let name = editingRow.cells[2].innerHTML;
+            let lastName = editingRow.cells[3].innerHTML;   
+            let ci = user[0].CI;               
+            let phoneNumber = editingRow.cells[4].innerHTML;
+            let id = user[0].id;                     
+
+            document.getElementById('user-name').value = name;                 
+            document.getElementById('user-last-name').value = lastName;
+            document.getElementById('user-ci').value = ci;
+            document.getElementById('user-phone-number').value = phoneNumber;
+            //cargamos el id del usuario en este input que esta como disabled, 
+            document.getElementById('input-with-id-user').value = id;            
+            //document.getElementById('formFileCreateGame').value = game[0].imgSrc.replace('img/', "");
+
+            let title = document.getElementById('create-user-title');
+            title.innerHTML = 'Modificar usuario';
+            let button = document.getElementById('create-user-button');
+            button.innerHTML = 'Modificar';
+
+            //Esto hace que al hacer click en el boton modificar, la pagina haga scroll hasta arriba, que es donde esta el formulario con los datos cargados para modificar
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+            
+        } else {
+            alert('Por favor selecciona un juego.');
+        }
+        
+    });
+
+    function modifyUser(id){
+        let usersList = JSON.parse(localStorage.getItem('usersPersistance'));
+        //console.log(gamesList)
+        //aca de nuevo, cada vez que hago el getItem del local storage tengo que volver a instanciar esos objetos, es decir volver a combertir esos objetos en instancias de la clase Game
+        usersList = usersList.map(userData => new User(
+            userData.id,
+            userData.name,
+            userData.lastName,
+            userData.CI,
+            userData.phoneNumber,
+            userData.imgSrc,            
+        )) 
+        
+        let indexUserToBeModify = usersList.findIndex((user) => user.id == id)
+
+        let userName = document.getElementById('user-name').value
+        userName = userName.charAt(0).toUpperCase() + userName.slice(1); //Pongo el primer caracter en mayuscula       
+        let userLastName = document.getElementById('user-last-name').value;
+        userLastName = userLastName.charAt(0).toUpperCase() + userLastName.slice(1); //Pongo el primer caracter en mayuscula
+        let userCi = document.getElementById('user-ci').value;
+        let userPhoneNumber = document.getElementById('user-phone-number').value;    
+
+        usersList[indexUserToBeModify].name = userName;
+        usersList[indexUserToBeModify].lastName = userLastName;
+        usersList[indexUserToBeModify].CI = userCi;
+        usersList[indexUserToBeModify].phoneNumber = userPhoneNumber;
+        //usersList[indexUserToBeModify].imgSrc = imgSrc;
+        
+        alert('Usuario modificado');
+        localStorage.setItem('usersPersistance', JSON.stringify(usersList));
+        listUsers(usersList);
+        cleanFormAddUser();        
+
+        let title = document.getElementById('create-user-title');
+        title.innerHTML = 'Alta usuario';
+        let button = document.getElementById('create-user-button');
+        button.innerHTML = 'Crear Usuario';
+    }
+    
+    
     
     //Funciones para remover
     let removeUserButton = document.getElementById('remove-user-button');
     removeUserButton.addEventListener('click', () => removeUser(getInputRadioCheckedId()));    
 
-    function getUserById(id){
+    /*function getUserById(id){
         //Hago esta funcion así solo manoseo una sola vez la variable global USERS, cada vez que tengo un id y quiero saber que usuario es, usar esta funcion
         let userById;
 
@@ -95,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         return userById //el usuario que tiene ese id, USERS.id == id       
        
-    }
+    }*/
 
     function getInputRadioCheckedId() {        
         let arrayInputsCheckRadioButtons = document.querySelectorAll('.form-check-input');        
