@@ -53,7 +53,7 @@ td {
 
 .user-table-wrapper {
     overflow-y: scroll;
-    max-height: 300px;    
+    height: 300px;    
     margin-bottom: 10px;
     border: 1px solid #E9ECEF;
     border-radius: 5px;    

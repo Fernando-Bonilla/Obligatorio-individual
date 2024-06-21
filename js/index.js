@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             
         } else {
-            alert('Por favor selecciona un juego.');
+            alert('Por favor selecciona un usuario.');
         }
 
     } 
@@ -139,21 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Funciones para remover
     let removeUserButton = document.getElementById('remove-user-button');
     removeUserButton.addEventListener('click', () => removeUser(getInputRadioCheckedId()));    
-
-    /*function getUserById(id){
-        //Hago esta funcion así solo manoseo una sola vez la variable global USERS, cada vez que tengo un id y quiero saber que usuario es, usar esta funcion
-        let userById;
-
-        USERS.forEach((user) =>{
-            
-            if(id == user.id) {                
-                userById = user;                
-            }            
-        });
-        
-        return userById //el usuario que tiene ese id, USERS.id == id       
-       
-    }*/
 
     function getInputRadioCheckedId() {        
         let arrayInputsCheckRadioButtons = document.querySelectorAll('.form-check-input');        
@@ -249,8 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let searchBarUser = document.getElementById('bar-search-user')
     searchBarUser.addEventListener('keyup', searchUser);
 
-    function searchUser(){
-        //console.log("entra")                
+    function searchUser(){                      
         let searchBarUserValue = document.getElementById('bar-search-user').value.toLowerCase();        
         
         //usar metodo filter
@@ -258,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let usersWithCoincidence = USERS.filter((user) => {                        
                 return user.name.toLowerCase().includes(searchBarUserValue) || 
                     user.lastName.toLowerCase().includes(searchBarUserValue) || 
-                    user.phoneNumber.includes(searchBarUserValue); // == searchBarUserValue;//==  || user.lastName.toLowerCase() == searchBarUserValue || user.phoneNumber == searchBarUserValue;           
+                    user.phoneNumber.includes(searchBarUserValue);         
                  
             });
             listUsers(usersWithCoincidence);
