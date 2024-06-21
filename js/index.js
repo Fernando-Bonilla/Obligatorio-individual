@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });    
 
-    function addUser(){      
+    function addUser(){   
+        let userId = Math.max(...USERS.map(user => user.id)) + 1;   
         let userName = document.getElementById('user-name').value
         userName = userName.charAt(0).toUpperCase() + userName.slice(1); //Pongo el primer caracter en mayuscula       
         let userLastName = document.getElementById('user-last-name').value;
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }          
 
         if(userName != "" && userLastName != "" && userCi != "" && userPhoneNumber != ""){
-            let userCreated = new User (USERS.length + 1, userName, userLastName, userCi, userPhoneNumber, userProfilePicture);
+            let userCreated = new User (userId, userName, userLastName, userCi, userPhoneNumber, userProfilePicture);
             //let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
 
             USERS.push(userCreated);
@@ -53,20 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert('Usuario creado');      
             cleanFormAddUser();
             listUsers(USERS);
-        }
-
-        /*if(userName == "" || userLastName == "" || userCi == "" || userPhoneNumber == ""){
-            alert('Por favor complete todos los datos');
-        }else {
-            let userCreated = new User (USERS.length + 1, userName, userLastName, userCi, userPhoneNumber, userProfilePicture);
-            //let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
-
-            USERS.push(userCreated);
-            localStorage.setItem('usersPersistance', JSON.stringify(USERS)); 
-            alert('Usuario creado');      
-            cleanFormAddUser();
-            listUsers(USERS);                       
-        }*/                
+        }        
     }
 
     function cleanFormAddUser() {
@@ -78,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('input-with-id-user').value = "";
     }
 
-    //Funcion que captura los datos del usuario a modificar y los carga en los inputs correspondientes
+    //Llamamos a la funcion que captura los datos del usuario a modificar y los carga en los inputs correspondientes
     document.getElementById('modify-user').addEventListener('click', getDataAndLoadFormAddUser);
 
     function getDataAndLoadFormAddUser() {
@@ -93,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let lastName = editingRow.cells[3].innerHTML;   
             let ci = user[0].CI;               
             let phoneNumber = editingRow.cells[4].innerHTML;
-            let id = user[0].id;                     
+            let id = user[0].id;                            
 
             document.getElementById('user-name').value = name;                 
             document.getElementById('user-last-name').value = lastName;
@@ -101,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('user-phone-number').value = phoneNumber;
             //cargamos el id del usuario en este input que esta como disabled, 
             document.getElementById('input-with-id-user').value = id;            
-            //document.getElementById('formFileCreateGame').value = game[0].imgSrc.replace('img/', "");
 
             let title = document.getElementById('create-user-title');
             title.innerHTML = 'Modificar usuario';
@@ -121,17 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } 
 
     function modifyUser(id){
-        let usersList = JSON.parse(localStorage.getItem('usersPersistance'));
-        //console.log(gamesList)
-        //aca de nuevo, cada vez que hago el getItem del local storage tengo que volver a instanciar esos objetos, es decir volver a combertir esos objetos en instancias de la clase Game
-        usersList = usersList.map(userData => new User(
-            userData.id,
-            userData.name,
-            userData.lastName,
-            userData.CI,
-            userData.phoneNumber,
-            userData.imgSrc,            
-        )) 
+        let usersList = JSON.parse(localStorage.getItem('usersPersistance'));    
         
         let indexUserToBeModify = usersList.findIndex((user) => user.id == id)
 
@@ -145,8 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         usersList[indexUserToBeModify].name = userName;
         usersList[indexUserToBeModify].lastName = userLastName;
         usersList[indexUserToBeModify].CI = userCi;
-        usersList[indexUserToBeModify].phoneNumber = userPhoneNumber;
-        //usersList[indexUserToBeModify].imgSrc = imgSrc;
+        usersList[indexUserToBeModify].phoneNumber = userPhoneNumber;        
         
         alert('Usuario modificado');
         localStorage.setItem('usersPersistance', JSON.stringify(usersList));
@@ -157,8 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title.innerHTML = 'Alta usuario';
         let button = document.getElementById('create-user-button');
         button.innerHTML = 'Crear Usuario';
-    }
-    
+    }    
     
     
     //Funciones para remover
