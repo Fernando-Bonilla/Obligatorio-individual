@@ -35,7 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let userLastName = document.getElementById('user-last-name').value;
         userLastName = userLastName.charAt(0).toUpperCase() + userLastName.slice(1); //Pongo el primer caracter en mayuscula
         let userCi = document.getElementById('user-ci').value;
-        let userPhoneNumber = document.getElementById('user-phone-number').value;        
+        let userPhoneNumber = document.getElementById('user-phone-number').value;  
+        
+        let userStreetAddress = document.getElementById('user-street-address').value
+        userStreetAddress = userStreetAddress.charAt(0).toUpperCase() + userStreetAddress.slice(1);
+        let userStreetNumber = document.getElementById('user-street-number').value
+
         
         let userProfilePicture;   
         if(document.getElementById('user-profile-picture').value == "") {
@@ -45,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
             userProfilePicture = "imgs/" + document.getElementById('user-profile-picture').files[0].name; 
         }          
 
-        if(userName != "" && userLastName != "" && userCi != "" && userPhoneNumber != ""){
-            let userCreated = new User (userId, userName, userLastName, userCi, userPhoneNumber, userProfilePicture);
+        if(userName != "" && userLastName != "" && userCi != "" && userPhoneNumber != "" && userStreetAddress != "" && userStreetNumber != ""){
+            let userCreated = new User (userId, userName, userLastName, userCi, userPhoneNumber, userProfilePicture, userStreetAddress, userStreetNumber);
             //let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
 
             USERS.push(userCreated);
@@ -62,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('user-last-name').value = "";
         document.getElementById('user-ci').value = "";
         document.getElementById('user-phone-number').value = "";
+        document.getElementById('user-street-address').value = "";
+        document.getElementById('user-street-number').value = "";
         document.getElementById('user-profile-picture').value = "";
         document.getElementById('input-with-id-user').value = "";
     }
@@ -75,18 +82,25 @@ document.addEventListener("DOMContentLoaded", () => {
         let editingRow;        
 
         if (selectedUser) {
-            let user = USERS.filter((user) => user.id == selectedUser.id);  
+            let usersList = JSON.parse(localStorage.getItem('usersPersistance'));
+            
+            let user = usersList.filter((user) => user.id == selectedUser.id);  
             editingRow = selectedUser.parentElement.parentElement; //aca capturamos la row entera, el input guardado en selected user, padre td, padre de td es la row
             let name = editingRow.cells[2].innerHTML;
             let lastName = editingRow.cells[3].innerHTML;   
             let ci = user[0].CI;               
             let phoneNumber = editingRow.cells[4].innerHTML;
-            let id = user[0].id;                            
+            let streetName = user[0].address.street;
+            let streetNumber = user[0].address.number
+            let id = user[0].id;   
+            console.log(user)                         
 
             document.getElementById('user-name').value = name;                 
             document.getElementById('user-last-name').value = lastName;
             document.getElementById('user-ci').value = ci;
             document.getElementById('user-phone-number').value = phoneNumber;
+            document.getElementById('user-street-address').value = streetName;
+            document.getElementById('user-street-number').value = streetNumber;
             //cargamos el id del usuario en este input que esta como disabled, 
             document.getElementById('input-with-id-user').value = id;            
 
@@ -117,12 +131,18 @@ document.addEventListener("DOMContentLoaded", () => {
         let userLastName = document.getElementById('user-last-name').value;
         userLastName = userLastName.charAt(0).toUpperCase() + userLastName.slice(1); //Pongo el primer caracter en mayuscula
         let userCi = document.getElementById('user-ci').value;
-        let userPhoneNumber = document.getElementById('user-phone-number').value;    
+        let userPhoneNumber = document.getElementById('user-phone-number').value;  
+        let userStreetAddress = document.getElementById('user-street-address').value;
+        userStreetAddress = userStreetAddress.charAt(0).toUpperCase() + userStreetAddress.slice(1);
+        let userStreetNumber = document.getElementById('user-street-number').value;
 
         usersList[indexUserToBeModify].name = userName;
         usersList[indexUserToBeModify].lastName = userLastName;
         usersList[indexUserToBeModify].CI = userCi;
-        usersList[indexUserToBeModify].phoneNumber = userPhoneNumber;        
+        usersList[indexUserToBeModify].phoneNumber = userPhoneNumber;
+        usersList[indexUserToBeModify].address.street = userStreetAddress; 
+        usersList[indexUserToBeModify].address.number = userStreetNumber; 
+        //console.log(usersList[indexUserToBeModify])   
         
         alert('Usuario modificado');
         localStorage.setItem('usersPersistance', JSON.stringify(usersList));
@@ -257,6 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonUserInfo.addEventListener('click', () => showUserInformation(getInputRadioCheckedId()));
 
     function showUserInformation(id) {
+        let usersList = JSON.parse(localStorage.getItem('usersPersistance'));
 
         let sectionUserContainer = document.getElementById('user-info-section');
 
@@ -271,14 +292,16 @@ document.addEventListener("DOMContentLoaded", () => {
         
         infoUserContainer.classList.add('info-user-container'); 
 
-        USERS.forEach((user) => {
-            if(user.id == id) {                
+        usersList.forEach((user) => {
+            if(user.id == id) {  
+                console.log(user)              
                 infoUserContainer.innerHTML = 
                 `<p><strong>Nombre:</strong>    ${user.name}</p>
                 <p><strong>Apellido:</strong>   ${user.lastName}</p>
                 <p><strong>CI:</strong>         ${user.CI}</p>
                 <p><strong>Telefono:</strong>   ${user.phoneNumber}</p>
-                <p><strong>Direccion:</strong> </p>`;
+                <p><strong>Direccion:</strong> ${user.address.street} ${user.address.number}</p>`;
+                console.log(user.address.street)               
 
                 sectionUserContainer.appendChild(infoUserContainer);                
             }

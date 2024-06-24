@@ -35,6 +35,15 @@
                         <label for="formGroupExampleInput" class="form-label">Telefono</label>
                         <input id="user-phone-number" type="tel" class="form-control" id="formGroupExampleInput" placeholder="099532844" required pattern="[0-9]{9}">
                     </div>
+                    <div class="row mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Direccion</label>
+                        <div class="col">                            
+                            <input id="user-street-address" type="text" class="form-control" placeholder="General Flores" aria-label="First name" required maxlength="10">
+                        </div>
+                        <div class="col">
+                            <input id="user-street-number" type="tel" class="form-control" placeholder="356" aria-label="Last name" required>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Foto usuario</label>
                         <input id="user-profile-picture" class="form-control" type="file" id="formFile">
