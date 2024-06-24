@@ -30,10 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function addUser(){   
         let userId = Math.max(...USERS.map(user => user.id)) + 1;   
+
         let userName = document.getElementById('user-name').value
-        userName = userName.charAt(0).toUpperCase() + userName.slice(1); //Pongo el primer caracter en mayuscula       
+        userName = userName.charAt(0).toUpperCase() + userName.slice(1); //Pongo el primer caracter en mayuscula 
+
         let userLastName = document.getElementById('user-last-name').value;
         userLastName = userLastName.charAt(0).toUpperCase() + userLastName.slice(1); //Pongo el primer caracter en mayuscula
+        
         let userCi = document.getElementById('user-ci').value;
         let userPhoneNumber = document.getElementById('user-phone-number').value;  
         
@@ -83,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (selectedUser) {
             let usersList = JSON.parse(localStorage.getItem('usersPersistance'));
-            
+
             let user = usersList.filter((user) => user.id == selectedUser.id);  
             editingRow = selectedUser.parentElement.parentElement; //aca capturamos la row entera, el input guardado en selected user, padre td, padre de td es la row
             let name = editingRow.cells[2].innerHTML;
