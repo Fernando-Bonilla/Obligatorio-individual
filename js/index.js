@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if(userName != "" && userLastName != "" && userCi != "" && userPhoneNumber != "" && userStreetAddress != "" && userStreetNumber != ""){
             let userCreated = new User (userId, userName, userLastName, userCi, userPhoneNumber, userProfilePicture, userStreetAddress, userStreetNumber);
-            //let userCreated = {id: USERS.length + 1, name: userName, lastName: userLastName, CI: userCi, phoneNumber: userPhoneNumber, imgSrc: userProfilePicture};
 
             USERS.push(userCreated);
             localStorage.setItem('usersPersistance', JSON.stringify(USERS)); 
@@ -213,8 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
             input.id = user.id;
             input.classList.add('form-check-input');
             input.type = 'radio';
-            input.name = 'flexRadioDefault';
-            input.addEventListener('click', checkOrUncheckInput);
+            input.name = 'flexRadioDefault';            
 
             let tdImg = document.createElement('td');
             let imgUser = document.createElement('img');
@@ -240,19 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             tableBody.appendChild(tr);
         }  
-    }
-    
-    function checkOrUncheckInput(e){
-        //aca agregar un checkeo, si el input esta checked y recibe un click, deschequearlo        
-        //if (e.target.checked == true){
-            //console.log(e.target)
-           //e.target.checked = false
-            //console.log('et')
-        //}else{
-            //e.target.checked = true
-       
-        //console.log(e.target.checked)
-    }
+    }      
     
     let searchBarUser = document.getElementById('bar-search-user')
     searchBarUser.addEventListener('keyup', searchUser);
