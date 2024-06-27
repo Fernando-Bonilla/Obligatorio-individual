@@ -148,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         alert('Usuario modificado');
         localStorage.setItem('usersPersistance', JSON.stringify(usersList));
+        usersList = JSON.parse(localStorage.getItem('usersPersistance')); // vuelvo a hacer el get porque sino cuando modifico algo en la tabla no se muestra modificado, porque sino es el userList del inicio de la funcion, que no tiene eso modificado
         listUsers(usersList);
         cleanFormAddUser();        
 
@@ -180,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function removeUser(id){        
         let indexOfUser;
+        let USERS = JSON.parse(localStorage.getItem('usersPersistance')); 
         USERS.forEach((user) => {                   
             if(user.id == id){
                 indexOfUser = USERS.indexOf(user)
@@ -248,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         //usar metodo filter
         if(searchBarUserValue != "") {
+            let USERS = JSON.parse(localStorage.getItem('usersPersistance'));
             let usersWithCoincidence = USERS.filter((user) => {                        
                 return user.name.toLowerCase().includes(searchBarUserValue) || 
                     user.lastName.toLowerCase().includes(searchBarUserValue) || 
